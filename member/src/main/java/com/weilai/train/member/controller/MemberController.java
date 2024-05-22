@@ -1,5 +1,7 @@
 package com.weilai.train.member.controller;
 
+import com.weilai.train.common.resp.CommonResp;
+import com.weilai.train.member.req.MemberRegisterReq;
 import com.weilai.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +17,14 @@ public class MemberController {
 
 
     @GetMapping("/count")
-    public Integer count() {
-        return memberService.count();
+    public CommonResp<Integer> count() {
+        int count = memberService.count();
+        return new CommonResp<>(count);
     }
 
     @PostMapping("/register")
-    public long register(String mobile) {
-        return memberService.register(mobile);
+    public CommonResp<Long> register(MemberRegisterReq req) {
+        long register = memberService.register(req);
+        return new CommonResp<>(register);
     }
 }
